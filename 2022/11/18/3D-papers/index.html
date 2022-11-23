@@ -4,19 +4,24 @@
   <meta charset="utf-8">
   
   
-  <title>3D papers | blog</title>
+  <title>3D CNN machining feature recognition | AlexNet</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="3D papers">
+  <meta name="description" content="3D convolutional neural network for machining feature recognition with gradient-based visual explanations from 3D CAD models  Status quo:Conventional methods Graph based Volume decomposition Hint base">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3D CNN machining feature recognition">
 <meta property="og:url" content="http://example.com/2022/11/18/3D-papers/index.html">
-<meta property="og:site_name" content="blog">
+<meta property="og:site_name" content="AlexNet">
+<meta property="og:description" content="3D convolutional neural network for machining feature recognition with gradient-based visual explanations from 3D CAD models  Status quo:Conventional methods Graph based Volume decomposition Hint base">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f917.png?v8">
+<meta property="og:image" content="http://example.com/3D-CNN-machining-feature-recognition/image1.png">
 <meta property="article:published_time" content="2022-11-18T03:54:34.000Z">
-<meta property="article:modified_time" content="2022-11-18T03:54:34.696Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:modified_time" content="2022-11-23T10:04:20.092Z">
+<meta property="article:author" content="alex">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.githubassets.com/images/icons/emoji/unicode/1f917.png?v8">
   
-    <link rel="alternate" href="/atom.xml" title="blog" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="AlexNet" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -34,7 +39,9 @@
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
   
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
 
 <body>
   <div id="container">
@@ -44,7 +51,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">blog</a>
+        <a href="/" id="logo">AlexNet</a>
       </h1>
       
     </div>
@@ -85,7 +92,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      3D papers
+      3D CNN machining feature recognition
     </h1>
   
 
@@ -93,11 +100,45 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <p><a target="_blank" rel="noopener" href="https://www.nature.com/articles/s41598-022-19212-6.pdf">3D convolutional neural network for machining feature recognition with gradient-based visual explanations from 3D CAD models</a></p>
+<p><br><br></p>
+<h2 id="Status-quo"><a href="#Status-quo" class="headerlink" title="Status quo:"></a>Status quo:</h2><h3 id="Conventional-methods"><a href="#Conventional-methods" class="headerlink" title="Conventional methods"></a>Conventional methods</h3><ol>
+<li>Graph based</li>
+<li>Volume decomposition</li>
+<li>Hint based </li>
+<li>Similarity based<ul>
+<li>generate the axis of ratation using moment of inertia</li>
+<li>using axis of rotaion to generate the distribution</li>
+</ul>
+</li>
+</ol>
+<h3 id="Deep-learning-based-methods"><a href="#Deep-learning-based-methods" class="headerlink" title="Deep learning based methods"></a>Deep learning based methods</h3><ol>
+<li>Rotionally invariant model</li>
+<li>Learning both 3D data and 2D muti-view data </li>
+<li>FeatureNet(3D-CNN)</li>
+</ol>
+<h3 id="Class-activation-mapping-for-feature-location"><a href="#Class-activation-mapping-for-feature-location" class="headerlink" title="Class activation mapping for feature location"></a>Class activation mapping for feature location</h3><ol>
+<li>Using GAP (global average pooling)</li>
+<li>Grad-CAM (using the gradient of backpropagation)</li>
+<li></li>
+</ol>
+<p><br><br></p>
+<h2 id="Related-model-FeatureNet"><a href="#Related-model-FeatureNet" class="headerlink" title="Related model: FeatureNet"></a>Related model: FeatureNet</h2><ul>
+<li>Has good performance on single feature recognition task, performance on multi-feature recognition task is not distinguished.</li>
+<li>Not able to locate the feature</li>
+</ul>
+<p><br><br></p>
+<h2 id="hugs-Paper-model"><a href="#hugs-Paper-model" class="headerlink" title=":hugs:Paper model:"></a><span class="github-emoji"><span>🤗</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f917.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>Paper model:</h2><ul>
+<li>Part1: 3D CNN, for multi-machining feature classification.</li>
+<li>Part2: Grad-CAM, for feature area estimation.</li>
+<li>Achived 98% accuracy on feature classification.</li>
+</ul>
+<h3 id="Data-generation-and-pre-processing"><a href="#Data-generation-and-pre-processing" class="headerlink" title="Data generation and pre-processing"></a>Data generation and pre-processing</h3><p>data conversion<br><img src="/../3D-CNN-machining-feature-recognition/image1.png"></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/18/3D-papers/" data-id="clalyz7ay0000hjxidije2wfy" data-title="3D papers" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/18/3D-papers/" data-id="clatfh1wq0000qgxi90asenf6" data-title="3D CNN machining feature recognition" class="article-share-link">Share</a>
       
       
       
@@ -148,7 +189,7 @@
       <ul>
         
           <li>
-            <a href="/2022/11/18/3D-papers/">3D papers</a>
+            <a href="/2022/11/18/3D-papers/">3D CNN machining feature recognition</a>
           </li>
         
           <li>
@@ -168,7 +209,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       
-      &copy; 2022 John Doe<br>
+      &copy; 2022 alex<br>
       Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
