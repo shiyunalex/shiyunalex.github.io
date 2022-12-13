@@ -4,19 +4,21 @@
   <meta charset="utf-8">
   
   
-  <title>Grad-CAM | AlexNet</title>
+  <title>CAM and Grad-CAM | AlexNet</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Grad-CAM:Visaul Explainations from Deep Networks via Gradient-based Localization">
+  <meta name="description" content="Grad-CAM:Visaul Explainations from Deep Networks via Gradient-based Localization CAM (Class Activation Map)Model Structure CNN -&gt; GAP (Global Average Pooling) -&gt; Dense (n-class output) More deta">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Grad-CAM">
+<meta property="og:title" content="CAM and Grad-CAM">
 <meta property="og:url" content="http://example.com/2022/12/05/Grad-Cam/index.html">
 <meta property="og:site_name" content="AlexNet">
-<meta property="og:description" content="Grad-CAM:Visaul Explainations from Deep Networks via Gradient-based Localization">
+<meta property="og:description" content="Grad-CAM:Visaul Explainations from Deep Networks via Gradient-based Localization CAM (Class Activation Map)Model Structure CNN -&gt; GAP (Global Average Pooling) -&gt; Dense (n-class output) More deta">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/Grad-Cam/image1.png">
 <meta property="article:published_time" content="2022-12-05T03:06:00.000Z">
-<meta property="article:modified_time" content="2022-12-05T03:32:41.460Z">
+<meta property="article:modified_time" content="2022-12-13T10:12:44.172Z">
 <meta property="article:author" content="alex">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Grad-Cam/image1.png">
   
     <link rel="alternate" href="/atom.xml" title="AlexNet" type="application/atom+xml">
   
@@ -89,7 +91,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      Grad-CAM
+      CAM and Grad-CAM
     </h1>
   
 
@@ -98,11 +100,24 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1610.02391.pdf">Grad-CAM:Visaul Explainations from Deep Networks via Gradient-based Localization</a></p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+<h2 id="CAM-Class-Activation-Map"><a href="#CAM-Class-Activation-Map" class="headerlink" title="CAM (Class Activation Map)"></a>CAM (Class Activation Map)</h2><h3 id="Model-Structure"><a href="#Model-Structure" class="headerlink" title="Model Structure"></a>Model Structure</h3><p><img src="/../Grad-Cam/image1.png" alt="Model Structure"></p>
+<p>CNN -&gt; GAP (Global Average Pooling) -&gt; Dense (n-class output)</p>
+<p>More detailed,</p>
+<p>328 channels -(GAP)-&gt; tensor(328,) -(dense)-&gt; tensor(8,)</p>
+<h3 id="How-to-calculate-CAM"><a href="#How-to-calculate-CAM" class="headerlink" title="How to calculate CAM"></a>How to calculate CAM</h3><ol>
+<li>2D-GAP (torch.nn.2D_Average_Pooling)</li>
+</ol>
+<p>For a given model, let $f_k$ represent the value of the $k_{th}$ channel at spatial location $(x,y)$. $F_k$ is the $k_{th}$ output of GAP layer.(let $Z$ represent the number of unit in $k_th$ chanel, $F_x$ should be divided by $Z$,$Z$ is omitted as it is a contant )<br>$$<br>F_k=\sum_{x,y}f_k(x,y)<br>$$</p>
+<ol start="2">
+<li>Dense layer</li>
+</ol>
+<p>let $S_c$ be the input of softmax layer for class $c$.<br>$$<br>S_c=\sum_kw^c_kF_k<br>$$</p>
+<p>3.CAM<br>$$<br>M_c(x,y) = \sum_kw_k^c<br>$$</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/05/Grad-Cam/" data-id="clba8sgwy0000crxiez7ne46a" data-title="Grad-CAM" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/12/05/Grad-Cam/" data-id="clba8sgwy0000crxiez7ne46a" data-title="CAM and Grad-CAM" class="article-share-link">Share</a>
       
       
       
@@ -153,7 +168,7 @@
       <ul>
         
           <li>
-            <a href="/2022/12/05/Grad-Cam/">Grad-CAM</a>
+            <a href="/2022/12/05/Grad-Cam/">CAM and Grad-CAM</a>
           </li>
         
           <li>

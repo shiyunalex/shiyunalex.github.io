@@ -87,7 +87,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/12/05/Grad-Cam/">Grad-CAM</a>
+      <a class="p-name article-title" href="/2022/12/05/Grad-Cam/">CAM and Grad-CAM</a>
     </h1>
   
 
@@ -96,11 +96,24 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1610.02391.pdf">Grad-CAM:Visaul Explainations from Deep Networks via Gradient-based Localization</a></p>
-<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+<h2 id="CAM-Class-Activation-Map"><a href="#CAM-Class-Activation-Map" class="headerlink" title="CAM (Class Activation Map)"></a>CAM (Class Activation Map)</h2><h3 id="Model-Structure"><a href="#Model-Structure" class="headerlink" title="Model Structure"></a>Model Structure</h3><p><img src="/../Grad-Cam/image1.png" alt="Model Structure"></p>
+<p>CNN -&gt; GAP (Global Average Pooling) -&gt; Dense (n-class output)</p>
+<p>More detailed,</p>
+<p>328 channels -(GAP)-&gt; tensor(328,) -(dense)-&gt; tensor(8,)</p>
+<h3 id="How-to-calculate-CAM"><a href="#How-to-calculate-CAM" class="headerlink" title="How to calculate CAM"></a>How to calculate CAM</h3><ol>
+<li>2D-GAP (torch.nn.2D_Average_Pooling)</li>
+</ol>
+<p>For a given model, let $f_k$ represent the value of the $k_{th}$ channel at spatial location $(x,y)$. $F_k$ is the $k_{th}$ output of GAP layer.(let $Z$ represent the number of unit in $k_th$ chanel, $F_x$ should be divided by $Z$,$Z$ is omitted as it is a contant )<br>$$<br>F_k=\sum_{x,y}f_k(x,y)<br>$$</p>
+<ol start="2">
+<li>Dense layer</li>
+</ol>
+<p>let $S_c$ be the input of softmax layer for class $c$.<br>$$<br>S_c=\sum_kw^c_kF_k<br>$$</p>
+<p>3.CAM<br>$$<br>M_c(x,y) = \sum_kw_k^c<br>$$</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/05/Grad-Cam/" data-id="clba8sgwy0000crxiez7ne46a" data-title="Grad-CAM" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/12/05/Grad-Cam/" data-id="clba8sgwy0000crxiez7ne46a" data-title="CAM and Grad-CAM" class="article-share-link">Share</a>
       
       
       
@@ -272,7 +285,7 @@
       <ul>
         
           <li>
-            <a href="/2022/12/05/Grad-Cam/">Grad-CAM</a>
+            <a href="/2022/12/05/Grad-Cam/">CAM and Grad-CAM</a>
           </li>
         
           <li>
