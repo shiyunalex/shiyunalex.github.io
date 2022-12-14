@@ -73,6 +73,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-hexo" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/12/14/hexo/" class="article-date">
+  <time class="dt-published" datetime="2022-12-14T05:47:10.000Z" itemprop="datePublished">2022-12-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2022/12/14/hexo/">hexo</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="How-to-enable-letax-in-hexo-posts"><a href="#How-to-enable-letax-in-hexo-posts" class="headerlink" title="How to enable letax in hexo posts"></a>How to enable letax in hexo posts</h2><p><a target="_blank" rel="noopener" href="https://ranmaosong.github.io/2017/11/29/hexo-support-mathjax/">Link</a></p>
+<h2 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-kramed --save</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h2><p>/node_modules/hexo-renderer-kramed/lib/renderer.js</p>
+<p>change<br></p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Change inline math rule</span><br><span class="line">function formatText(text) {</span><br><span class="line">    // Fit kramed's rule: $$ + \1 + $$</span><br><span class="line">    return text.replace(/`\$(.*?)\$`/g, '$$$$$1$$$$');</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><br>to<br><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Change inline math rule</span><br><span class="line">function formatText(text) {</span><br><span class="line">    return text;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="3"><a href="#3" class="headerlink" title="3."></a>3.</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-math --save</span><br><span class="line">npm install hexo-renderer-mathjax --save</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="4"><a href="#4" class="headerlink" title="4."></a>4.</h2><p>/node_modules/hexo-renderer-mathjax/mathjax.html</p>
+<p>change<br></p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"&gt;&lt;/script&gt;</span><br></pre></td></tr></tbody></table></figure><br>to<br><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"&gt;&lt;/script&gt;</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="6"><a href="#6" class="headerlink" title="6."></a>6.</h2><p>/node_modules/kramed/lib/rules/inline.js</p>
+<p>change<br></p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">escape: /^\\([\\`*{}\[\]()#$+\-.!_&gt;])/,</span><br></pre></td></tr></tbody></table></figure><br>to<br><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">escape: /^\\([`*\[\]()# +\-.!_&gt;])/,</span><br></pre></td></tr></tbody></table></figure><br>change<br><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">em: /^\b_((?:__|[\s\S])+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,</span><br></pre></td></tr></tbody></table></figure><br>to<br><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">em: /^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h2 id="7"><a href="#7" class="headerlink" title="7."></a>7.</h2><p>_config.yml</p>
+<p>add<br></p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mathjax:</span><br><span class="line">    enable: true</span><br></pre></td></tr></tbody></table></figure><br>post header<p></p>
+<p>add</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: Testing Mathjax with Hexo</span><br><span class="line">category: Uncategorized</span><br><span class="line">date: 2017/05/03</span><br><span class="line">mathjax: true</span><br><span class="line">---</span><br></pre></td></tr></tbody></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/12/14/hexo/" data-id="clbndi7ye0003mtxi1o0p73wp" data-title="hexo" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Grad-Cam" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/12/05/Grad-Cam/" class="article-date">
@@ -95,25 +145,31 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1610.02391.pdf">Grad-CAM:Visaul Explainations from Deep Networks via Gradient-based Localization</a></p>
-<h2 id="CAM-Class-Activation-Map"><a href="#CAM-Class-Activation-Map" class="headerlink" title="CAM (Class Activation Map)"></a>CAM (Class Activation Map)</h2><h3 id="Model-Structure"><a href="#Model-Structure" class="headerlink" title="Model Structure"></a>Model Structure</h3><p><img src="/../Grad-Cam/image1.png" alt="Model Structure"></p>
+        <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1610.02391.pdf">Grad-CAM:Visaul Explainations from Deep Networks via Gradient-based Localization</a><br><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1512.04150.pdf">Learning Deep Features for Discriminative Localization</a></p>
+<h2 id="CAM-Class-Activation-Map"><a href="#CAM-Class-Activation-Map" class="headerlink" title="CAM (Class Activation Map)"></a>CAM (Class Activation Map)</h2><h3 id="Model-Structure"><a href="#Model-Structure" class="headerlink" title="Model Structure"></a>Model Structure</h3><p><img src="../Grad-Cam/image1.png" alt="Model Structure"></p>
 <p>CNN -&gt; GAP (Global Average Pooling) -&gt; Dense (n-class output)</p>
 <p>More detailed,</p>
 <p>328 channels -(GAP)-&gt; tensor(328,) -(dense)-&gt; tensor(8,)</p>
+<p>GAP layer could be replaced by Global Max Pooling.</p>
 <h3 id="How-to-calculate-CAM"><a href="#How-to-calculate-CAM" class="headerlink" title="How to calculate CAM"></a>How to calculate CAM</h3><ol>
 <li>2D-GAP (torch.nn.2D_Average_Pooling)</li>
 </ol>
-<p>For a given model, let $f_k$ represent the value of the $k_{th}$ channel at spatial location $(x,y)$. $F_k$ is the $k_{th}$ output of GAP layer.(let $Z$ represent the number of unit in $k_th$ chanel, $F_x$ should be divided by $Z$,$Z$ is omitted as it is a contant )<br>$$<br>F_k=\sum_{x,y}f_k(x,y)<br>$$</p>
-<ol start="2">
-<li>Dense layer</li>
+<p>For a given model, let $f_k$ represent the value of the $k_{th}$ channel at spatial location $(x,y)$. $F_k$ is the $k_{th}$ output of GAP layer.(let $Z$ represent the number of unit in $k_th$ chanel, $F_x$ should be divided by $Z$,$Z$ is omitted as it is a contant )</p>
+<script type="math/tex; mode=display">
+F_k=\sum_{x,y}f_k(x,y)</script><ol>
+<li>CAM</li>
 </ol>
-<p>let $S_c$ be the input of softmax layer for class $c$.<br>$$<br>S_c=\sum_kw^c_kF_k<br>$$</p>
-<p>3.CAM<br>$$<br>M_c(x,y) = \sum_kw_k^c<br>$$</p>
+<p>$M_c$ , the spatial element of class $c$ activation map at (x,y)</p>
+<script type="math/tex; mode=display">
+M_c(x,y) = \sum_kw_k^cf(x,y)</script><p>Class score $S_c$ , the input of softmax layer for class $c$.</p>
+<script type="math/tex; mode=display">
+S_c=\sum_kw^c_kF_k=\sum_{x,y}M_c(x,y)</script><h2 id="Grad-CAM"><a href="#Grad-CAM" class="headerlink" title="Grad-CAM"></a>Grad-CAM</h2><p>The restrict of CAM: must use GAP as the last second layer of the model, which often makes the model sacrifice in accuracy.</p>
+<p>The idea of Grad-CAM is to find the weight $w$ ,which has the same functionality as the last dense layer in CAM. </p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/12/05/Grad-Cam/" data-id="clba8sgwy0000crxiez7ne46a" data-title="CAM and Grad-CAM" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/12/05/Grad-Cam/" data-id="clbndi7yd0001mtxibkv6dgaq" data-title="CAM and Grad-CAM" class="article-share-link">Share</a>
       
       
       
@@ -183,15 +239,15 @@
 <li>Part2: Grad-CAM, for feature area estimation.</li>
 <li>Achived 98% accuracy on feature classification.</li>
 </ul>
-<h3 id="Data-generation-and-pre-processing"><a href="#Data-generation-and-pre-processing" class="headerlink" title="Data generation and pre-processing"></a>Data generation and pre-processing</h3><p>Original 3D-CAD dataset were generated by parametric learning. Then 3D CAD data was converted to HDF5 data. Below is the data conversion process. Data was labeled using muti-hot encoding.<br><img src="/../3D-CNN-machining-feature-recognition/image1.png" alt="data conversion"></p>
-<h3 id="3-CNN-mode-nothing-special"><a href="#3-CNN-mode-nothing-special" class="headerlink" title="3-CNN mode, nothing special"></a>3-CNN mode, nothing special</h3><p><img src="/../3D-CNN-machining-feature-recognition/image2.png" alt="3D-CNN sturcture"></p>
+<h3 id="Data-generation-and-pre-processing"><a href="#Data-generation-and-pre-processing" class="headerlink" title="Data generation and pre-processing"></a>Data generation and pre-processing</h3><p>Original 3D-CAD dataset were generated by parametric learning. Then 3D CAD data was converted to HDF5 data. Below is the data conversion process. Data was labeled using muti-hot encoding.<br><img src="../3D-CNN-machining-feature-recognition/image1.png" alt="data conversion"></p>
+<h3 id="3-CNN-mode-nothing-special"><a href="#3-CNN-mode-nothing-special" class="headerlink" title="3-CNN mode, nothing special"></a>3-CNN mode, nothing special</h3><p><img src="../3D-CNN-machining-feature-recognition/image2.png" alt="3D-CNN sturcture"></p>
 <p>Prevent overfitting using GAP layer and max pooling layer.</p>
-<h3 id="Class-activation-mapping-explainable-AI"><a href="#Class-activation-mapping-explainable-AI" class="headerlink" title="Class activation mapping, (explainable AI)"></a>Class activation mapping, (explainable AI)</h3><p><img src="/../3D-CNN-machining-feature-recognition/image3.png" alt="Grad-CAM sturcture"><br>Using Grad-CAM, which applys GAP to a certain CNN layer.<br>gradiant-&gt;relu-&gt;</p>
+<h3 id="Class-activation-mapping-explainable-AI"><a href="#Class-activation-mapping-explainable-AI" class="headerlink" title="Class activation mapping, (explainable AI)"></a>Class activation mapping, (explainable AI)</h3><p><img src="../3D-CNN-machining-feature-recognition/image3.png" alt="Grad-CAM sturcture"><br>Using Grad-CAM, which applys GAP to a certain CNN layer.<br>gradiant-&gt;relu-&gt;</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/18/3D-papers/" data-id="clatfh1wq0000qgxi90asenf6" data-title="3D CNN machining feature recognition" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/18/3D-papers/" data-id="clbndi7y90000mtxi72bi2ggj" data-title="3D CNN machining feature recognition" class="article-share-link">Share</a>
       
       
       
@@ -226,23 +282,19 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></tbody></table></figure>
-
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new "My New Post"</span><br></pre></td></tr></tbody></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></tbody></table></figure>
-
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
 <h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></tbody></table></figure>
-
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></tbody></table></figure>
-
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/18/hello-world/" data-id="clatfh1wu0001qgxi6qkddmt3" data-title="Hello World" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/18/hello-world/" data-id="clbndi7ye0002mtxi4yyvc2ap" data-title="Hello World" class="article-share-link">Share</a>
       
       
       
@@ -283,6 +335,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2022/12/14/hexo/">hexo</a>
+          </li>
         
           <li>
             <a href="/2022/12/05/Grad-Cam/">CAM and Grad-CAM</a>
@@ -343,5 +399,21 @@
 
 
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
 </body>
 </html>
